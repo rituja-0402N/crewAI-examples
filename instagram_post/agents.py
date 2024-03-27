@@ -4,12 +4,14 @@ from crewai import Agent
 from tools.browser_tools import BrowserTools
 from tools.search_tools import SearchTools
 from langchain.agents import load_tools
+from langchain_openai import ChatOpenAI
 
 from langchain.llms import Ollama
 
 class MarketingAnalysisAgents:
 	def __init__(self):
-		self.llm = Ollama(model=os.environ['MODEL'])
+		self.OpenAIGPT35 = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
+		# self.llm = Ollama(model=os.environ['MODEL'])
 
 	def product_competitor_agent(self):
 		return Agent(
@@ -27,7 +29,7 @@ class MarketingAnalysisAgents:
 					SearchTools.search_internet
 			],
 			allow_delegation=False,
-			llm=self.llm,
+			llm=self.OpenAIGPT35,
 			verbose=True
 		)
 
@@ -46,7 +48,7 @@ class MarketingAnalysisAgents:
 					SearchTools.search_internet,
 					SearchTools.search_instagram
 			],
-			llm=self.llm,
+			llm=self.OpenAIGPT35,
 			verbose=True
 		)
 
@@ -69,7 +71,7 @@ class MarketingAnalysisAgents:
 					SearchTools.search_internet,
 					SearchTools.search_instagram
 			],
-			llm=self.llm,
+			llm=self.OpenAIGPT35,
 			verbose=True
 		)
 
@@ -89,7 +91,7 @@ class MarketingAnalysisAgents:
 					SearchTools.search_internet,
 					SearchTools.search_instagram
 				],
-				llm=self.llm,
+				llm=self.OpenAIGPT35,
 				allow_delegation=False,
 				verbose=True
 		)
@@ -112,6 +114,6 @@ class MarketingAnalysisAgents:
 					SearchTools.search_internet,
 					SearchTools.search_instagram
 				],
-				llm=self.llm,
+				llm=self.OpenAIGPT35,
 				verbose=True
 		)
